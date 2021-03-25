@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { getPets } from '../../api/petfinder';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const HomePage = () => {
   const [data, setData] = useState(null);
+  const { type } = useParams();
+  console.log(type);
 
   useEffect(() => {
     async function getPetsData() {
-      const petsData = await getPets();
+      const petsData = await getPets(type);
       setData(petsData);
     }
 
     getPetsData();
-  }, []);
+  }, [type]);
   console.log(data);
 
   if (!data) {

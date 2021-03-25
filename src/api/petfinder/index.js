@@ -36,12 +36,9 @@ const ANIMALS_QUERY_PARAMS = {
   limit: 'limit'
 };
 
-/** https://www.petfinder.com/developers/v2/docs/#get-animal-types */
-const ANIMAL_TYPES_BASE_URL = 'https://api.petfinder.com/v2/types';
-
-export const getPets = async () => {
+export const getPets = async (type = '') => {
   /** https://www.petfinder.com/developers/v2/docs/#get-animals */
-  const requestUrl = `${PETS_FINDER_API_BASE_URL}/animals?${ANIMALS_QUERY_PARAMS['limit']}=20`;
+  const requestUrl = `${PETS_FINDER_API_BASE_URL}/animals?${ANIMALS_QUERY_PARAMS['limit']}=20&${ANIMALS_QUERY_PARAMS['type']}=${type}`;
   let oauthToken = localStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
 
   if (!oauthToken) {
@@ -64,6 +61,29 @@ export const getPets = async () => {
 
 export const getPetDetails = async (id) => {
   const requestUrl = `${PETS_FINDER_API_BASE_URL}/animals/${id}`;
+  let oauthToken = localStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
+
+  if (!oauthToken) {
+    await getPetFinderAuthorizationToken();
+    oauthToken = localStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
+  }
+
+  const response = await fetch(requestUrl, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${oauthToken}`
+    },
+    credentials: 'same-origin'
+  });
+
+  const json = await response.json();
+
+  return json;
+};
+
+export const getPetTypes = async () => {
+  /** https://www.petfinder.com/developers/v2/docs/#get-animal-types */
+  const requestUrl = `${PETS_FINDER_API_BASE_URL}/types`;
   let oauthToken = localStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
 
   if (!oauthToken) {
