@@ -1,6 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import HomePage from './pages/home';
+import PetDetailsPage from './pages/detail';
 
 function App() {
   return (
@@ -11,23 +12,14 @@ function App() {
             <li>
               <Link to="/">Home</Link>
             </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
           </ul>
         </nav>
         <Switch>
-          <Route path="/about">
-            <h2>About</h2>
+          <Route path="/" exact>
+            <HomePage />
           </Route>
-          <Route path="/users">
-            <h2>Users</h2>
-          </Route>
-          <Route path="/">
-            <h2>Home</h2>
+          <Route path="/pet/details/:id">
+            <PetDetailsPage />
           </Route>
         </Switch>
       </div>
