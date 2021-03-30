@@ -27,7 +27,7 @@ export const getPetFinderAuthorizationToken = async () => {
   /**
    * Note: This is not how you would store tokens in a production application. Tokens stored in local storage are susceptible to different attack vectors. We are using it here for the simplicity of the project.
    */
-  localStorage.setItem(PET_FINDER_OAUTH_TOKEN_KEY, json['access_token']);
+  sessionStorage.setItem(PET_FINDER_OAUTH_TOKEN_KEY, json['access_token']);
 };
 
 const PETS_FINDER_API_BASE_URL = 'https://api.petfinder.com/v2';
@@ -39,11 +39,11 @@ const ANIMALS_QUERY_PARAMS = {
 export const getPets = async (type = '') => {
   /** https://www.petfinder.com/developers/v2/docs/#get-animals */
   const requestUrl = `${PETS_FINDER_API_BASE_URL}/animals?${ANIMALS_QUERY_PARAMS['limit']}=20&${ANIMALS_QUERY_PARAMS['type']}=${type}`;
-  let oauthToken = localStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
+  let oauthToken = sessionStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
 
   if (!oauthToken) {
     await getPetFinderAuthorizationToken();
-    oauthToken = localStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
+    oauthToken = sessionStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
   }
 
   const response = await fetch(requestUrl, {
