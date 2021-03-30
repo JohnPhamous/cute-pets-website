@@ -61,11 +61,11 @@ export const getPets = async (type = '') => {
 
 export const getPetDetails = async (id) => {
   const requestUrl = `${PETS_FINDER_API_BASE_URL}/animals/${id}`;
-  let oauthToken = localStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
+  let oauthToken = sessionStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
 
   if (!oauthToken) {
     await getPetFinderAuthorizationToken();
-    oauthToken = localStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
+    oauthToken = sessionStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
   }
 
   const response = await fetch(requestUrl, {
@@ -84,11 +84,11 @@ export const getPetDetails = async (id) => {
 export const getPetTypes = async () => {
   /** https://www.petfinder.com/developers/v2/docs/#get-animal-types */
   const requestUrl = `${PETS_FINDER_API_BASE_URL}/types`;
-  let oauthToken = localStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
+  let oauthToken = sessionStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
 
   if (!oauthToken) {
     await getPetFinderAuthorizationToken();
-    oauthToken = localStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
+    oauthToken = sessionStorage.getItem(PET_FINDER_OAUTH_TOKEN_KEY);
   }
 
   const response = await fetch(requestUrl, {
