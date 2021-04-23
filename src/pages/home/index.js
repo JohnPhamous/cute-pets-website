@@ -20,22 +20,39 @@ const HomePage = () => {
   }
 
   return (
-    <div>
-      {data.map((animal) => (
-        <Link key={animal.id} to={`/pet/details/${animal.id}`}>
-          <p>{animal.name}</p>
-          {animal.photos[0] && <img src={animal.photos[0].medium} alt="" />}
-          <ul>
-            <li>Mixed: {animal.breeds.mixed.toString()}</li>
-            <li>Breed: {animal.breeds.primary}</li>
-            <li>Color: {animal.colors.primary}</li>
-            <li>Gender: {animal.gender}</li>
-            <li>Size: {animal.size}</li>
-            <li>Size: {animal.size}</li>
-            <li>Species: {animal.species}</li>
-          </ul>
-        </Link>
-      ))}
+    <div className="page">
+      <h2>
+        <span className="pet-type-label">{type ? `${type}s` : 'Pets'}</span>{' '}
+        available for adoption near you
+      </h2>
+      <div className="grid">
+        {data.map((animal) => (
+          <Link
+            key={animal.id}
+            to={`/pet/details/${animal.id}`}
+            className="pet"
+          >
+            <article>
+              <div className="pet-image-container">
+                {
+                  <img
+                    className="pet-image"
+                    src={
+                      animal.photos[0]?.medium ||
+                      'https://i.imgur.com/aEcJUFK.png'
+                    }
+                    alt=""
+                  />
+                }
+              </div>
+              <h3>{animal.name}</h3>
+              <p>Breed: {animal.breeds.primary}</p>
+              <p>Color: {animal.colors.primary}</p>
+              <p>Gender: {animal.gender}</p>
+            </article>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

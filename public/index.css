@@ -1,0 +1,56 @@
+.nav-logo {
+  background: white;
+}
+
+.nav-links {
+  background: purple;
+  color: white;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-link {
+  color: white;
+}
+
+.nav-link-active {
+  background: black;
+}
+
+.pet-type-label {
+  text-transform: capitalize;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 12px;
+  width: 100%;
+  padding: 0 32px;
+}
+
+.pet-image-container {
+  height: 300px;
+  width: 300px;
+  overflow: hidden;
+}
+
+.pet-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.pet {
+  text-decoration: none !important;
+  color: black;
+}
+
+.pet p {
+  margin: 0;
+}
+
+.page h2 {
+  text-align: center;
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { getPetTypes } from '../../api/petfinder';
 
 const Navigation = () => {
@@ -16,29 +16,34 @@ const Navigation = () => {
 
   return (
     <nav>
-      <ul>
+      <div className="nav-logo">
+        <h2>Petlover</h2>
+      </div>
+      <ul className="nav-links">
         <li>
-          <Link to="/">Home</Link>
+          <NavLink
+            to="/"
+            className="nav-link"
+            activeClassName="nav-link-active"
+            exact
+          >
+            All Pets
+          </NavLink>
         </li>
-        <li>
-          {data ? (
-            <ul>
-              Types:{' '}
-              {data.types.map((type) => (
-                <>
-                  <Link
-                    to={`/${type._links.self.href.split('/').pop()}`}
-                    key={type.name}
-                  >
-                    {type.name}
-                  </Link>{' '}
-                </>
-              ))}
-            </ul>
-          ) : (
-            'Loading...'
-          )}
-        </li>
+        {data
+          ? data.types.map((type) => (
+              <li>
+                <NavLink
+                  to={`/${type._links.self.href.split('/').pop()}`}
+                  key={type.name}
+                  className="nav-link"
+                  activeClassName="nav-link-active"
+                >
+                  {type.name}s
+                </NavLink>{' '}
+              </li>
+            ))
+          : 'Loading...'}
       </ul>
     </nav>
   );
