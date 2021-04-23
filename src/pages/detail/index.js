@@ -21,10 +21,10 @@ const PetDetailsPage = () => {
 
   return (
     <div>
-      <h1>{data.animal.name}</h1>
-      <p>{data.animal.description}</p>
-      <p>{data.animal.breeds.primary}</p>
-      {data.animal.photos.map((photo) => (
+      <h1>{data.name}</h1>
+      <p>{data.description}</p>
+      <p>{data.breeds.primary}</p>
+      {data.photos.map((photo) => (
         <img src={photo.medium} key={photo.medium} alt="" />
       ))}
     </div>

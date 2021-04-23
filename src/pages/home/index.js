@@ -5,7 +5,6 @@ import { Link, useParams } from 'react-router-dom';
 const HomePage = () => {
   const [data, setData] = useState(null);
   const { type } = useParams();
-  console.log(type);
 
   useEffect(() => {
     async function getPetsData() {
@@ -15,7 +14,6 @@ const HomePage = () => {
 
     getPetsData();
   }, [type]);
-  console.log(data);
 
   if (!data) {
     return <h2>Loading...</h2>;
@@ -23,7 +21,7 @@ const HomePage = () => {
 
   return (
     <div>
-      {data.animals.map((animal) => (
+      {data.map((animal) => (
         <Link key={animal.id} to={`/pet/details/${animal.id}`}>
           <p>{animal.name}</p>
           {animal.photos[0] && <img src={animal.photos[0].medium} alt="" />}
