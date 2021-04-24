@@ -20,14 +20,43 @@ const PetDetailsPage = () => {
   }
 
   return (
-    <div>
-      <h1>{data.name}</h1>
-      <p>{data.description}</p>
-      <p>{data.breeds.primary}</p>
-      {data.photos.map((photo) => (
-        <img src={photo.medium} key={photo.medium} alt="" />
-      ))}
-    </div>
+    <main>
+      <div
+        className="hero-container"
+        style={{
+          backgroundImage: `linear-gradient(black, black), url("${
+            data.photos[1]?.full || 'https://i.imgur.com/aEcJUFK.png'
+          }")
+          `,
+          backgroundBlendMode: 'saturation',
+          backgroundSize: 'cover'
+        }}
+      >
+        <h2>Meet Foo</h2>
+        {/* <img
+          src={data.photos[1]?.full || 'https://i.imgur.com/aEcJUFK.png'}
+          alt=""
+          className="pet-image"
+        /> */}
+      </div>
+      <div className="pet-detail">
+        <div className="pet-image-container">
+          <img
+            className="pet-image"
+            src={data.photos[0]?.medium || 'https://i.imgur.com/aEcJUFK.png'}
+            alt=""
+          />
+        </div>
+        <div>
+          <h1>{data.name}</h1>
+          <h3>Breed: {data.breeds.primary}</h3>
+          <p>Color: {data.colors.primary || 'Unknown'}</p>
+          <p>Gender: {data.gender}</p>
+          <h3>Description</h3>
+          <p>{data.description}</p>
+        </div>
+      </div>
+    </main>
   );
 };
 
