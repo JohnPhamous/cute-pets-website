@@ -9,7 +9,7 @@ function App() {
       <div className="App">
         <Navigation />
         <Switch>
-          <Route path="/pet/details/:id">
+          <Route path="/:type/:id">
             <PetDetailsPage />
           </Route>
           <Route path="/:type?">

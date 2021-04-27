@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPetDetails } from '../../api/petfinder';
+import Hero from '../../components/hero';
 
 const PetDetailsPage = () => {
   const { id } = useParams();
@@ -21,24 +22,10 @@ const PetDetailsPage = () => {
 
   return (
     <main>
-      <div
-        className="hero-container"
-        style={{
-          backgroundImage: `linear-gradient(black, black), url("${
-            data.photos[1]?.full || 'https://i.imgur.com/aEcJUFK.png'
-          }")
-          `,
-          backgroundBlendMode: 'saturation',
-          backgroundSize: 'cover'
-        }}
-      >
-        <h2>Meet Foo</h2>
-        {/* <img
-          src={data.photos[1]?.full || 'https://i.imgur.com/aEcJUFK.png'}
-          alt=""
-          className="pet-image"
-        /> */}
-      </div>
+      <Hero
+        image={data.photos[1]?.full || 'https://i.imgur.com/aEcJUFK.png'}
+        displayText={`Meet ${data.name}`}
+      />
       <div className="pet-detail">
         <div className="pet-image-container">
           <img

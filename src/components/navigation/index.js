@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { getPetTypes } from '../../api/petfinder';
+import Logo from '../../assets/logo.svg';
 
 const Navigation = () => {
   const [data, setData] = useState();
@@ -17,7 +18,7 @@ const Navigation = () => {
   return (
     <nav>
       <div className="nav-logo">
-        <h2>Petlover</h2>
+        <img src={Logo} alt="Petlover" />
       </div>
       <ul className="nav-links">
         <li>
