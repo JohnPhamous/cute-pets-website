@@ -1,10 +1,6 @@
-const ANIMALS_QUERY_PARAMS = {
-  type: 'type',
-  limit: 'limit'
-};
-
-export const getPets = async (type = '') => {
-  const requestUrl = `/animals?&${ANIMALS_QUERY_PARAMS['type']}=${type}`;
+export const getPets = async (type = '', query = '') => {
+  const searchParams = new URLSearchParams({ type, query });
+  const requestUrl = `/animals?${searchParams.toString()}`;
 
   const response = await fetch(requestUrl, {
     method: 'GET'

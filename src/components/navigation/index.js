@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { getPetTypes } from '../../api/petfinder';
 import Logo from '../../assets/logo.svg';
+import Search from '../search';
 
 const Navigation = () => {
-  const [data, setData] = useState();
+  const [petTypes, setPetTypes] = useState([]);
 
   useEffect(() => {
     async function getPetTypesData() {
-      const petTypes = await getPetTypes();
-      setData(petTypes);
+      const { types } = await getPetTypes();
+      setPetTypes(types);
     }
 
     getPetTypesData();
@@ -18,7 +19,10 @@ const Navigation = () => {
   return (
     <nav>
       <div className="nav-logo">
-        <img src={Logo} alt="Petlover" />
+        <Link to="/">
+          <img src={Logo} alt="Petlover" />
+        </Link>
+        <Search />
       </div>
       <ul className="nav-links">
         <li>
@@ -31,12 +35,11 @@ const Navigation = () => {
             All Pets
           </NavLink>
         </li>
-        {data
-          ? data.types.map((type) => (
-              <li>
+        {petTypes.length > 0
+          ? petTypes.map((type) => (
+              <li key={type.name}>
                 <NavLink
                   to={`/${type._links.self.href.split('/').pop()}`}
-                  key={type.name}
                   className="nav-link"
                   activeClassName="nav-link-active"
                 >
