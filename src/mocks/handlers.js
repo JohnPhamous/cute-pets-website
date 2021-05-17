@@ -33,9 +33,7 @@ export const handlers = [
     let response = details[id];
 
     if (!response) {
-      const allValues = Object.values(details);
-      const randomIndex = Math.floor(Math.random() * allValues.length);
-      response = allValues[randomIndex];
+      return res(ctx.status(404));
     }
 
     return res(ctx.status(200), ctx.json(response));
